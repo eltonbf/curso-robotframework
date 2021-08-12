@@ -1,5 +1,6 @@
 *** Settings ***
-Library       SeleniumLibrary
+Library         SeleniumLibrary
+Library         String
 
 *** Variable ***
 ${URL}        http://automationpractice.com
@@ -10,6 +11,7 @@ ${BROWSER}    chrome
 ### Setup e Terdown
 Abrir navegador
     Open browser                     ${URL}                                                                                                ${BROWSER}
+    #Set Selenium Speed               0.5 seconds
 
 Fechar navegador
     Close browser
@@ -32,3 +34,79 @@ Conferir se o produto "${PRODUTO}" foi listado no site
 Conferir mensagem de erro "${MENSAGEM_ALERTA}"
     Wait Until Element Is Visible    xpath=//*[@id="center_column"]/h1
     Page Should Contain Element      xpath=//*[@id="center_column"]/p[@class='alert alert-warning']                                        ${MENSAGEM_ALERTA}
+
+Passar o mouse por cima da categoria "${CATEGORIA}" no menu principal superior de categorias.
+    Mouse Over                       xpath=//*[@id="block_top_menu"]//a[@title='Women']
+    Page Should Contain Element      xpath=//*[@id="block_top_menu"]//a[@title='Tops']
+
+Clicar na sub categoria "${SUBCATEGORIA}"
+    Click Element                    xpath=//*[@id="block_top_menu"]//a[@title='${SUBCATEGORIA}']
+    Page Should Contain Element      xpath=//*[@id="center_column"]/h1/span[1]
+
+Clicar no botão "${ADDTOCART}" do produto
+    Wait Until Element Is Visible    xpath=//*[@id="center_column"]//a[@class='product-name']
+    Mouse Over                       xpath=//*[@id="center_column"]//a[@class='product-name']
+    Wait Until Element Is Visible    xpath=//*[@id="center_column"]//a[@title='Add to cart']
+    Click Element                    xpath=//*[@id="center_column"]//a[@title='Add to cart']
+
+Clicar no botão "${CHECKOUT}"
+    Wait Until Element Is Visible    css=a.btn.btn-default.button.button-medium
+    Click Element                    css=a.btn.btn-default.button.button-medium
+    Page Should Contain Element      xpath=//*[@id="cart_title"]
+    Page Should Contain Element      xpath=//*[@id="product_1_1_0_0"]//p[@class='product-name']
+
+Adicionar o produto "${PRODUTO}" no carrinho
+    Digitar o nome de produto "${PRODUTO}" no campo de pesquisa
+    Clicar no botão de pesquisa
+    Clicar no botão "Add to Cart" do produto
+    Clicar no botão "Proceed to checkout"
+
+
+Clicar no ícone carrinho de compras no menu superior direito
+    Wait Until Element Is Visible    xpath=//*[@id="header"]//a[@title="View my shopping cart"]
+    Click Element                    xpath=//*[@id="header"]//a[@title="View my shopping cart"]
+
+Clicar no botão de remoção de produtos (delete) no produto do carrinho
+    Page Should Contain Element      xpath=//*[@id="cart_title"]
+    Click Element                    xpath=//*[@title="Delete"]
+    Page Should Contain Element      xpath=//*[@id="center_column"]/p[@class="alert alert-warning"]                                        Your shopping cart is empty.
+
+Clicar no botão superior direito “${BTNSIGN}”
+    Wait Until Element Is Visible    xpath=//*[@id="header"]//a[@class="login"]
+    Click Element                    xpath=//*[@id="header"]//a[@class="login"]
+    Page Should Contain Element      xpath=//h1[contains(text(),'Authentication')]
+
+Inserir um e-mail válido
+    Wait Until Element Is Visible       id=email_create
+    ${EMAIL}                            Generate Random String
+    Input Text                       xpath=//*[@id="email_create"]         ${EMAIL}@teste.com
+
+
+Clicar no botão "${CRIARCONTA}".
+    Click Element                    xpath=//*[@id="SubmitCreate"]
+
+
+Preencher os campos obrigatórios
+    Wait Until Element Is Visible       xpath=//*[@id="noSlide"]//h1[contains(text(),'Create an account')]
+    Select Radio Button              id_gender        id_gender1
+    Input Text                       xpath=//*[@id="customer_firstname"]                 Elton
+    Input Text                       xpath=//*[@id="customer_lastname"]                  John
+    Input Password                   xpath=//*[@id="passwd"]                            12345
+    Select From List By Value        xpath=//*[@id="days"]         17
+    Select From List By Value        xpath=//*[@id="months"]         12
+    Select From List By Value        xpath=//*[@id="years"]         2000
+    Input Text                       xpath=//*[@id="firstname"]       Elton                     
+    Input Text                       xpath=//*[@id="lastname"]          Jonnes
+    Input Text                       xpath=//*[@id="company"]           Facebook
+    Input Text                       xpath=//*[@id="address1"]           PioXII
+    Input Text                       xpath=//*[@id="city"]              Osasco
+    Select From List By Value        xpath=//*[@id="id_state"]         7 
+    Input Text                       xpath=//*[@id="postcode"]          06243
+    Select From List By Value        xpath=//*[@id="id_country"]         21  
+    Input Text                       xpath=//*[@id="phone_mobile"]      2345678
+
+
+Clicar em "${REGISTER}" para finalizar o cadastro
+    Click Element                   xpath=//*[@id="submitAccount"]
+    Page Should Contain Element     xpath=//*[@id="center_column"]//h1[contains(text(),'My account')]
+    
