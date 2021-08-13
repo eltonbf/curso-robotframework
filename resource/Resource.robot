@@ -77,10 +77,16 @@ Clicar no botão superior direito “${BTNSIGN}”
     Click Element                                                  xpath=//*[@id="header"]//a[@class="login"]
     Page Should Contain Element                                    xpath=//h1[contains(text(),'Authentication')]
 
+Criar um e-mail customizado
+    [Arguments]     ${NOME}     ${SOBRENOME}
+    ${STR_ALEATORIA}        Generate Random String
+    ${CUSTOM_EMAIL}         Set Variable        ${NOME}${SOBRENOME}${STR_ALEATORIA}@teste.com
+    [Return]                ${CUSTOM_EMAIL}
+
 Inserir um e-mail válido
     Wait Until Element Is Visible                                  id=email_create
-    ${EMAIL}                                                       Generate Random String
-    Input Text                                                     xpath=//*[@id="email_create"]                                                                         ${EMAIL}@teste.com
+    ${EMAIL}                         Criar um e-mail customizado  ${PESSOA.nome}  ${PESSOA.ultimonome}
+    Input Text                       xpath=//*[@id="email_create"]                         ${EMAIL}
 
 
 Clicar no botão "${CRIARCONTA}".
