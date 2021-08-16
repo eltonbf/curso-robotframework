@@ -18,9 +18,20 @@ Buscar um livro específico (GET em um livro específico)
 
 Cadastrar um novo livro (POST)
     Cadastrar um novo livro
-#   - Conferir se retorna todos os dados cadastrados para o novo livro
+    Conferir o status code    200
+    Conferir o reason   OK
+    Conferir se retorna todos os dados cadastrados do livro "201"
 
-#TO-DO: Alterar um livro (PUT)
-#   - Conferir se retorna todos os dados alterados do livro 150
-#TO-DO: Deletar um livro (DELETE)
-#   - Conferir se deleta o livro 200 (o response body deve ser vazio)
+Alterar um livro (PUT)
+    Alterar o livro "150"
+    Conferir o status code    200
+    Conferir o reason   OK
+    Conferir se retorna todos os dados alterados do livro "150"
+
+
+Deletar um livro (DELETE)
+    Excluir o livro "200"
+    Conferir o status code    200
+    Conferir o reason   OK
+#   (o response body deve ser vazio)
+    Conferir se excluiu o livro "200"
