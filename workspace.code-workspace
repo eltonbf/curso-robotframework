@@ -4,5 +4,18 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+            "rfLanguageServer.libraries": [
+                "BuiltIn-3.1.1",
+                "Collections-3.1.1",
+                "DateTime-3.1.1",
+                "Dialogs-3.1.1",
+                "OperatingSystem-3.1.1",
+                "Process-3.1.1",
+                "Screenshot-3.1.1",
+                "SeleniumLibrary-3.3.1",
+                "Telnet-3.1.1",
+                "XML-3.1.1"
+            ]
+        }
 }
