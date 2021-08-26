@@ -16,3 +16,5 @@ docker run --rm --name execucao_robot -v "diretorio_local_suites":/opt/robotfram
 
 
 Exemplo: docker run --rm --name execucao_robot -v "C:\RobotFramework\AdvancedProjects\Docker\suites":/opt/robotframework/tests -v "C:\RobotFramework\AdvancedProjects\Docker\suites\results":/opt/robotframework/results run_robot:latest robot -d /opt/robotframework/results /opt/robotframework/tests
+
+docker run --rm --name execucao_robot -v "C:\Users\Groove_Elton\Documents\Curso\SuiteSiteTestePractice\Docker\suites":/opt/robotframework/tests -v "C:\Users\Groove_Elton\Documents\Curso\SuiteSiteTestePractice\Docker\suites\results":/opt/robotframework/results run_robot:latest robot -d /opt/robotframework/results /opt/robotframework/tests
