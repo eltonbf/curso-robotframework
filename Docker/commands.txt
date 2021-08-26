@@ -1,0 +1,18 @@
+## Criar o build da imagem
+docker build -t nome_da_sua_imagem ./diretorio/do/seu/dockerfile
+
+Exemplo: docker build -t run_robot ./docker_images
+
+
+## Consultar as imagens do seu Docker
+docker images
+
+## Remover uma imagem criada
+docker rmi nome_da_sua_imagem
+
+
+## Rodar os testes do Robot dentro do container
+docker run --rm --name execucao_robot -v "diretorio_local_suites":/opt/robotframework/tests -v "diretorio_local_resultados":/opt/robotframework/results nome_da_sua_imagem:lastest comando_que_executará_os_testes_do_robot
+
+
+Exemplo: docker run --rm --name execucao_robot -v "C:\RobotFramework\AdvancedProjects\Docker\suites":/opt/robotframework/tests -v "C:\RobotFramework\AdvancedProjects\Docker\suites\results":/opt/robotframework/results run_robot:latest robot -d /opt/robotframework/results /opt/robotframework/tests
